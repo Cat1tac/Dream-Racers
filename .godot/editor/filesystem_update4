@@ -1,5 +1,3 @@
-res://src/tracks/first_track.tscn
-res://src/tracks/ProceduralTrackGenerator.tscn
-res://src/core/main_game/main_game.tscn
-res://src/core/main_game/main_game.gd
-res://src/gameplay/local_multiplayer/local_player_view.tscn
+res://src/gameplay/player/player.tscn
+res://src/ui.tscn
+res://src/ui/ui.tscn
