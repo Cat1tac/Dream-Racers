@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://b6belynq8o81n"]
+
+[ext_resource type="Script" uid="uid://15ad33ohkjn6" path="res://src/resources/character_definitions/characters.gd" id="1_nin7g"]
+
+[resource]
+script = ExtResource("1_nin7g")
+speed = 5
+acceleration = 5

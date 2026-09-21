@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://rtbn8cgsje6q"]
+
+[ext_resource type="PackedScene" uid="uid://qmfcng3u4nyg" path="res://src/tracks/testtrack3.glb" id="1_k5ble"]
+
+[node name="testtrack3" unique_id=255077636 instance=ExtResource("1_k5ble")]
+
+[node name="@StaticBody3D@324655" parent="." index="1" unique_id=948730822]
+collision_layer = 4
+
+[node name="@StaticBody3D@324656" parent="." index="3" unique_id=742379502]
+collision_layer = 2

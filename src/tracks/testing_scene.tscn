@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://c0i43c0ijhpqa"]
+
+[ext_resource type="Script" uid="uid://cprhmbxvp1y2i" path="res://src/tracks/track.gd" id="1_geuls"]
+[ext_resource type="Texture2D" uid="uid://ddf583pk46ddn" path="res://assets/world/backgrounds/citrus_orchard_road_puresky_4k.hdr" id="2_0rn0s"]
+[ext_resource type="Texture2D" uid="uid://c3xk523bguaq8" path="res://assets/textures/debug/texture_10.png" id="5_r5e51"]
+[ext_resource type="Texture2D" uid="uid://c4tep3yuwfd4r" path="res://assets/textures/debug/texture_09.png" id="5_v2703"]
+[ext_resource type="Texture2D" uid="uid://b8f0gb1uxwpep" path="res://assets/textures/debug/texture_08.png" id="6_8fjtl"]
+[ext_resource type="PackedScene" uid="uid://o8gbnp303uhr" path="res://src/gameplay/objects/boost_panel.tscn" id="6_vsam8"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0xm2m"]
+panorama = ExtResource("2_0rn0s")
+energy_multiplier = 0.1
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("PanoramaSkyMaterial_0xm2m")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_h2yge")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vsam8"]
+albedo_texture = ExtResource("5_r5e51")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyhfs"]
+albedo_texture = ExtResource("5_v2703")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tefeu"]
+albedo_texture = ExtResource("6_8fjtl")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgi4"]
+albedo_texture = ExtResource("6_8fjtl")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6xl0"]
+albedo_texture = ExtResource("6_8fjtl")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_uujsa"]
+size = Vector3(100, 3.125, 25)
+
+[node name="Test World" type="Node3D" unique_id=2099563190 node_paths=PackedStringArray("player_spawners")]
+script = ExtResource("1_geuls")
+player_spawners = [NodePath("PlayerSpawner"), NodePath("PlayerSpwaner2")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=978683973]
+environment = SubResource("Environment_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1502146351]
+transform = Transform3D(0.87301576, -0.2776612, 0.4009337, -3.249735e-10, 0.82210416, 0.56933707, -0.487692, -0.49704003, 0.71770996, 0, 52.50665, 38.24308)
+light_energy = 0.324
+shadow_enabled = true
+
+[node name="PlayerSpawner" type="Marker3D" parent="." unique_id=1259090624]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 7.7104797, 10.274597, 40.046448)
+
+[node name="PlayerSpwaner2" type="Marker3D" parent="." unique_id=1251527552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.914607, 9.194978)
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="." unique_id=503541324]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 3.058401, -14.694933)
+use_collision = true
+collision_layer = 2
+radius = 5.241
+height = 9.883
+sides = 64
+material = SubResource("StandardMaterial3D_vsam8")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCylinder3D7" unique_id=1556216021]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24784517, 0, -2.4752228)
+operation = 2
+radius = 4.9091797
+height = 10.054
+sides = 64
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1538255626]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D" unique_id=906882371]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.401854, -0.5)
+use_collision = true
+collision_layer = 2
+size = Vector3(10000, 9.21, 10000)
+material = SubResource("StandardMaterial3D_jyhfs")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Node3D" unique_id=442614862]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, -2, 0)
+use_collision = true
+collision_layer = 2
+radius = 2.0
+material = SubResource("StandardMaterial3D_tefeu")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Node3D" unique_id=857128802]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 139, 1, -15)
+use_collision = true
+collision_layer = 2
+polygon = PackedVector2Array(0, 0, -2, 2, 1, 1, 4, 0)
+depth = 8.0
+material = SubResource("StandardMaterial3D_tbgi4")
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Node3D" unique_id=634763947]
+transform = Transform3D(0.258819, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.258819, 170, 1, -7)
+use_collision = true
+collision_layer = 2
+polygon = PackedVector2Array(0, 0, -7, 5, 1, 2, 7, 0)
+depth = 8.0
+material = SubResource("StandardMaterial3D_tbgi4")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node3D" unique_id=558960278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -422, 0, 19)
+use_collision = true
+collision_layer = 2
+radius = 1.0
+height = 7.455
+material = SubResource("StandardMaterial3D_o6xl0")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node3D" unique_id=720640334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -241, 0, -315)
+use_collision = true
+collision_layer = 2
+radius = 2.0
+height = 7.455
+material = SubResource("StandardMaterial3D_o6xl0")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Node3D" unique_id=711559384]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, 127)
+use_collision = true
+collision_layer = 2
+radius = 4.0
+height = 7.455
+material = SubResource("StandardMaterial3D_o6xl0")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Node3D" unique_id=1939152915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, -368)
+use_collision = true
+collision_layer = 2
+radius = 8.0
+height = 7.455
+material = SubResource("StandardMaterial3D_o6xl0")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Node3D" unique_id=220430687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127, 0, 315)
+use_collision = true
+collision_layer = 2
+radius = 16.0
+height = 7.455
+material = SubResource("StandardMaterial3D_o6xl0")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Node3D" unique_id=1987978421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 549, 0, 19)
+use_collision = true
+collision_layer = 2
+radius = 32.0
+height = 7.455
+material = SubResource("StandardMaterial3D_o6xl0")
+
+[node name="Boost_Panel" parent="." unique_id=1231130700 instance=ExtResource("6_vsam8")]
+transform = Transform3D(12.93, 0, 0, 0, 12.93, 0, 0, 0, 12.93, 40.357655, 1.0379796, 22.095798)
+
+[node name="Boost_Panel2" parent="." unique_id=921683121 instance=ExtResource("6_vsam8")]
+transform = Transform3D(6.8744392, 0, -11.1454525, 0, 13.095, 0, 11.1454525, 0, 6.8744392, 58.132763, 1.0379796, -12.819613)
+
+[node name="Boost_Panel3" parent="." unique_id=599386041 instance=ExtResource("6_vsam8")]
+transform = Transform3D(-3.7781026, 0, -12.3970785, 0, 12.96, 0, 12.3970785, 0, -3.7781026, 92.21351, 1.0379796, -12.819613)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=423542701]
+transform = Transform3D(0.38999486, -0.9208171, 0, 0.9208171, 0.38999486, 0, 0, 0, 1, 1.6535568, 41.69993, 0)
+use_collision = true
+collision_layer = 6
+mesh = SubResource("BoxMesh_uujsa")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="." unique_id=1847457320]
+transform = Transform3D(0.87779796, 0.47903123, 0, -0.47903123, 0.87779796, 0, 0, 0, 1, -21.898285, 113.09883, 0)
+visible = false
+collision_layer = 6
+mesh = SubResource("BoxMesh_uujsa")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1698999769]
+transform = Transform3D(0.9999423, 0.010736465, 0, -0.010736465, 0.9999423, 0, 0, 0, 1, 77.37251, 89.460594, 0)
+use_collision = true
+collision_layer = 6
+mesh = SubResource("BoxMesh_uujsa")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=151684540]
+transform = Transform3D(0.99949926, 0.0056896675, 0.031127123, 0.03111198, 0.002730962, -0.9995122, -0.0057719, 0.9999801, 0.002552576, 26.673687, 82.35586, -0.69584656)
+use_collision = true
+collision_layer = 6
+radius = 9.0859375
+height = 20.0
+sides = 60

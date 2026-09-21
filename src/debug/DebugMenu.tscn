@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://csverqobfpghe"]
+
+[ext_resource type="Script" uid="uid://dhk1o4qidx1yy" path="res://src/debug/DebugMenu.gd" id="1_15w0a"]
+
+[node name="DebugMenu" type="Control" unique_id=359418805]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_15w0a")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2044023048]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=608252065]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SpeedHeader" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=399381308]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="CanvasLayer/VBoxContainer/SpeedHeader" unique_id=1918467266]
+layout_mode = 2
+text = "Speed: "
+
+[node name="SpeedNum" type="Label" parent="CanvasLayer/VBoxContainer/SpeedHeader" unique_id=1602464571]
+layout_mode = 2
+
+[node name="DriftTimerHeader" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=364916201]
+layout_mode = 2
+
+[node name="DriftTimerLabel" type="Label" parent="CanvasLayer/VBoxContainer/DriftTimerHeader" unique_id=2077491341]
+layout_mode = 2
+text = "Drift Timer "
+
+[node name="DrifttimerNum" type="Label" parent="CanvasLayer/VBoxContainer/DriftTimerHeader" unique_id=1275015865]
+layout_mode = 2
+
+[node name="AccelerationHeader" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1756226245]
+visible = false
+layout_mode = 2
+
+[node name="AccelerationLabel" type="Label" parent="CanvasLayer/VBoxContainer/AccelerationHeader" unique_id=1870503481]
+visible = false
+layout_mode = 2
+text = "Acceleration: "
+
+[node name="AccelerationNum" type="Label" parent="CanvasLayer/VBoxContainer/AccelerationHeader" unique_id=1624750040]
+visible = false
+layout_mode = 2
+
+[node name="Steering" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=568022849]
+layout_mode = 2
+
+[node name="SteeringAngleLabel" type="Label" parent="CanvasLayer/VBoxContainer/Steering" unique_id=184819828]
+layout_mode = 2
+text = "Steering Angle: "
+
+[node name="SteeringAngleNum" type="Label" parent="CanvasLayer/VBoxContainer/Steering" unique_id=24982467]
+layout_mode = 2
+
+[node name="max_steering_angle" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=35541480]
+layout_mode = 2
+
+[node name="max_steering_Label" type="Label" parent="CanvasLayer/VBoxContainer/max_steering_angle" unique_id=1764947782]
+layout_mode = 2
+text = "Max steering Angle: "
+
+[node name="max_steering_Num" type="Label" parent="CanvasLayer/VBoxContainer/max_steering_angle" unique_id=1660436206]
+layout_mode = 2
+
+[node name="angular_velocity" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1699213275]
+layout_mode = 2
+
+[node name="angular_velcoity_label" type="Label" parent="CanvasLayer/VBoxContainer/angular_velocity" unique_id=890134194]
+layout_mode = 2
+text = "Angular Velocity: "
+
+[node name="angular_velocity_num" type="Label" parent="CanvasLayer/VBoxContainer/angular_velocity" unique_id=1717806552]
+layout_mode = 2

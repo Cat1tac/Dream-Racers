@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://o8gbnp303uhr"]
+
+[ext_resource type="Script" uid="uid://c5uxlccraqn1p" path="res://src/gameplay/objects/boost_panel.gd" id="1_wdn4h"]
+[ext_resource type="PackedScene" uid="uid://ctc7dailc1t4j" path="res://assets/models/objects/boostPanel.glb" id="2_7q8wq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qoyvp"]
+size = Vector3(2.032, 0.36, 1)
+
+[node name="Boost_Panel" type="Node3D" unique_id=1231130700]
+script = ExtResource("1_wdn4h")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1116080213]
+collision_layer = 8
+collision_mask = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1246584373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01159668, 0.13092041, 0)
+shape = SubResource("BoxShape3D_qoyvp")
+
+[node name="boostPanel" parent="." unique_id=1087365721 instance=ExtResource("2_7q8wq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

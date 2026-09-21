@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bqy6omuyhur8a"]
+
+[ext_resource type="Script" uid="uid://mjhscwt6m4gt" path="res://src/gameplay/local_multiplayer/local_player_view.gd" id="1_re3ib"]
+
+[node name="LocalPlayerView" type="GridContainer" unique_id=1952478170 node_paths=PackedStringArray("playerViews")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+script = ExtResource("1_re3ib")
+playerViews = [NodePath("SubViewportContainer1"), NodePath("SubViewportContainer2"), NodePath("SubViewportContainer3"), NodePath("SubViewportContainer4")]
+
+[node name="SubViewportContainer1" type="SubViewportContainer" parent="." unique_id=434146389]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer1" unique_id=529121116]
+handle_input_locally = false
+size = Vector2i(576, 648)
+render_target_update_mode = 4
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="." unique_id=189967511]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2" unique_id=676831671]
+handle_input_locally = false
+size = Vector2i(576, 648)
+render_target_update_mode = 4
+
+[node name="SubViewportContainer3" type="SubViewportContainer" parent="." unique_id=2000070844]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer3" unique_id=1368959407]
+handle_input_locally = false
+size = Vector2i(576, 324)
+render_target_update_mode = 0
+
+[node name="SubViewportContainer4" type="SubViewportContainer" parent="." unique_id=370986530]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer4" unique_id=1986151598]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 0

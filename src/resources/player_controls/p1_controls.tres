@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlayerControls" format=3 uid="uid://dlkv4ebximllc"]
+
+[ext_resource type="Script" uid="uid://d1mgh844d72qw" path="res://src/resources/player_controls/player_controls.gd" id="1_k7xhu"]
+
+[resource]
+script = ExtResource("1_k7xhu")
+forward = "p1_forward"
+backward = "p1_backward"
+turn_right = "p1_turn_right"
+turn_left = "p1_turn_left"
+spin = "p1_spin"
+drift = "p1_drift"
