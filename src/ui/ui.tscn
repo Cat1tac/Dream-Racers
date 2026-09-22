@@ -262,7 +262,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 60
 text = "Dream 
-     Racers"
+    Racers"
 
 [node name="ButtonMargin" type="MarginContainer" parent="UILayer/MainMenu/VBoxContainer" unique_id=1874748348]
 layout_mode = 2
