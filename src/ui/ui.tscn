@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://dt5xamoe48268"]
 
 [ext_resource type="Theme" uid="uid://0fbvbawx3yln" path="res://src/ui/mainmenu_theme.tres" id="1_jlntk"]
+[ext_resource type="Script" uid="uid://b14rojhjw7t7j" path="res://src/ui/scripts/ui_manager.gd" id="1_qemve"]
 [ext_resource type="Texture2D" uid="uid://cc8ck4keppajc" path="res://icon.svg" id="1_sp1ie"]
+[ext_resource type="Script" uid="uid://cp1d4g0ts4gle" path="res://src/ui/scripts/main_menu.gd" id="2_8wxmc"]
+[ext_resource type="Script" uid="uid://cvt0e2rfrgy70" path="res://src/ui/scripts/character_select.gd" id="4_7abqo"]
+[ext_resource type="Script" uid="uid://bbq3mvswtwiv3" path="res://src/ui/scripts/track_select.gd" id="6_gucsq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wxmc"]
 bg_color = Color(0.9098039, 0.47843137, 0.58431375, 1)
@@ -38,6 +42,7 @@ corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
 [node name="UI" type="Node" unique_id=270345837]
+script = ExtResource("1_qemve")
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=515055114]
 
@@ -55,14 +60,18 @@ grow_vertical = 0
 size_flags_vertical = 10
 mouse_filter = 2
 color = Color(0.9529412, 0.7529412, 0.78039217, 1)
+metadata/_edit_lock_ = true
 
 [node name="MainMenu" type="Control" parent="UILayer" unique_id=426220796]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_8wxmc")
+metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MainMenu" unique_id=1042798536]
 layout_mode = 1
@@ -71,6 +80,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="(PLACEHOLDER)TitleFrame" type="PanelContainer" parent="UILayer/MainMenu/VBoxContainer" unique_id=642017524]
 custom_minimum_size = Vector2(150, 150)
@@ -107,6 +117,7 @@ theme_override_constants/separation = 20
 [node name="RaceButton" type="Button" parent="UILayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=933511100]
 layout_mode = 2
 size_flags_vertical = 3
+focus_next = NodePath("../HowToPlayButton")
 theme = ExtResource("1_jlntk")
 theme_override_font_sizes/font_size = 48
 text = "Race"
@@ -114,6 +125,8 @@ text = "Race"
 [node name="HowToPlayButton" type="Button" parent="UILayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=294773205]
 layout_mode = 2
 size_flags_vertical = 3
+focus_next = NodePath("../ExitButton")
+focus_previous = NodePath("../RaceButton")
 theme = ExtResource("1_jlntk")
 theme_override_font_sizes/font_size = 48
 text = "How to Play"
@@ -126,6 +139,7 @@ theme_override_font_sizes/font_size = 48
 text = "Exit"
 
 [node name="CharacterSelect" type="Control" parent="UILayer" unique_id=1462250579]
+unique_name_in_owner = true
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -133,6 +147,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_7abqo")
+metadata/_edit_lock_ = true
+
+[node name="BackButtonMargin" type="MarginContainer" parent="UILayer/CharacterSelect" unique_id=2049678978]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="BackButton" type="Button" parent="UILayer/CharacterSelect/BackButtonMargin" unique_id=772965871]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Back"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/CharacterSelect" unique_id=674948339]
 layout_mode = 1
@@ -141,6 +175,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="CharacterSelectLabel" type="Label" parent="UILayer/CharacterSelect/VBoxContainer" unique_id=1936347364]
 layout_mode = 2
@@ -267,6 +303,7 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="TrackSelect" type="Control" parent="UILayer" unique_id=424881822]
+unique_name_in_owner = true
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -276,6 +313,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("6_gucsq")
 metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/TrackSelect" unique_id=162563002]
@@ -286,6 +324,7 @@ anchor_bottom = 1.0
 offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="CharacterSelectLabel" type="Label" parent="UILayer/TrackSelect/VBoxContainer" unique_id=420353133]
 layout_mode = 2
@@ -337,6 +376,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_jlntk")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2116748829]
-offset_right = 40.0
-offset_bottom = 40.0
+[connection signal="pressed" from="UILayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox/RaceButton" to="." method="_on_race_button_pressed"]
+[connection signal="pressed" from="UILayer/CharacterSelect/BackButtonMargin/BackButton" to="." method="_on_char_back_button_pressed"]
