@@ -15,7 +15,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -576.0
-offset_top = -307.0
+offset_top = -308.0
 offset_right = 576.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -24,6 +24,7 @@ mouse_filter = 2
 color = Color(0.9529412, 0.7529412, 0.78039217, 1)
 
 [node name="MainMenu" type="Control" parent="UILayer" unique_id=426220796]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,27 +51,29 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_constants/margin_left = 300
 theme_override_constants/margin_right = 300
-theme_override_constants/margin_bottom = 35
+theme_override_constants/margin_bottom = 40
 
 [node name="ButtonVBox" type="VBoxContainer" parent="UILayer/MainMenu/VBoxContainer/ButtonMargin" unique_id=307193461]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 20
 
 [node name="RaceButton" type="Button" parent="UILayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=933511100]
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
 text = "Race"
 
 [node name="HowToPlayButton" type="Button" parent="UILayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=294773205]
 layout_mode = 2
+size_flags_vertical = 3
 theme = SubResource("Theme_1ea20")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "How to Play"
 
 [node name="ExitButton" type="Button" parent="UILayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=699455541]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
 text = "Exit"
 
 [node name="CharacterSelect" type="Control" parent="UILayer" unique_id=1462250579]
@@ -124,6 +127,7 @@ texture_normal = ExtResource("1_sp1ie")
 [node name="CharacterViewMargin" type="MarginContainer" parent="UILayer/CharacterSelect/VBoxContainer" unique_id=2033354532]
 layout_mode = 2
 size_flags_vertical = 6
+theme_override_constants/margin_bottom = 25
 
 [node name="CharacterViewHBox" type="HBoxContainer" parent="UILayer/CharacterSelect/VBoxContainer/CharacterViewMargin" unique_id=430839112]
 layout_mode = 2
@@ -158,6 +162,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/TrackSelect" unique_id=162563002]
@@ -168,3 +174,48 @@ anchor_bottom = 1.0
 offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CharacterSelectLabel" type="Label" parent="UILayer/TrackSelect/VBoxContainer" unique_id=420353133]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 48
+text = "Track Select"
+horizontal_alignment = 1
+
+[node name="SelectedTrackView" type="PanelContainer" parent="UILayer/TrackSelect/VBoxContainer" unique_id=1643635451]
+custom_minimum_size = Vector2(500, 225)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+
+[node name="TrackViewMargin" type="MarginContainer" parent="UILayer/TrackSelect/VBoxContainer" unique_id=1889994990]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/margin_bottom = 25
+
+[node name="CharacterViewHBox" type="HBoxContainer" parent="UILayer/TrackSelect/VBoxContainer/TrackViewMargin" unique_id=1461557336]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 60
+
+[node name="Track1" type="PanelContainer" parent="UILayer/TrackSelect/VBoxContainer/TrackViewMargin/CharacterViewHBox" unique_id=900318843]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Track2" type="PanelContainer" parent="UILayer/TrackSelect/VBoxContainer/TrackViewMargin/CharacterViewHBox" unique_id=449278947]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Track3" type="PanelContainer" parent="UILayer/TrackSelect/VBoxContainer/TrackViewMargin/CharacterViewHBox" unique_id=1773307534]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Track4" type="PanelContainer" parent="UILayer/TrackSelect/VBoxContainer/TrackViewMargin/CharacterViewHBox" unique_id=270231830]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
