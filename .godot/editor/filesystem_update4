@@ -3,3 +3,11 @@ res://src/tracks/ProceduralTrackGenerator.tscn
 res://src/core/main_game/main_game.tscn
 res://src/core/main_game/main_game.gd
 res://src/gameplay/local_multiplayer/local_player_view.tscn
+res://src/tracks/testtrack1.tscn
+res://src/gameplay/player/kart/basekart.tscn
+res://src/gameplay/player/player.tscn
+res://src/gameplay/player/kart/kart_rigidbody_sphere.gd
+res://src/shaders/cel_shader.tres
+res://src/shaders/shaderSphere.tscn
+res://src/shaders/kart_shader_material.tres
+res://src/gameplay/player/kart/Kart.tscn

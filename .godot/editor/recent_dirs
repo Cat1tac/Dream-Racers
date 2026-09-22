@@ -1,7 +1,8 @@
+res://src/shaders/
+res://src/gameplay/player/kart/
 res://src/tracks/
 res://src/gameplay/objects/
 res://src/gameplay/player/kart/curves/
-res://src/gameplay/player/kart/
 res://
 res://src/gameplay/player/kart/effects/
 res://src/resources/character_definitions/

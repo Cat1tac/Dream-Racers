@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cmw4ypmksqpsy"]
+
+[ext_resource type="PackedScene" uid="uid://clab6nmempnsp" path="res://assets/models/karts/BaseKart/kart.glb" id="1_82rc2"]
+[ext_resource type="Material" uid="uid://4t6wr7ytl4fm" path="res://src/shaders/kart_shader_material.tres" id="2_qa4xb"]
+
+[node name="kart" unique_id=2060035001 instance=ExtResource("1_82rc2")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
+
+[node name="Kart" parent="." index="0" unique_id=1073309382]
+surface_material_override/0 = ExtResource("2_qa4xb")

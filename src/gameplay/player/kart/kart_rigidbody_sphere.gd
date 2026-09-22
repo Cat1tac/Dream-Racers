@@ -298,7 +298,7 @@ func _set_dreamcatcher_boost(speedMultiplier : float, timeMultiplier : float) ->
 
 func _align_mesh_with_normal(_delta : float, normal : Vector3) -> void:
 	var up := normal.normalized() # gets normal of new up
-	var forward := center.global_basis.z # gets forward direction of kart
+	var forward := -center.global_basis.z # gets forward direction of kart
 	forward = (forward - up * forward.dot(up)).normalized()
 	
 	var right := up.cross(forward).normalized() #get the right
@@ -499,7 +499,7 @@ func _apply_steering(delta : float) -> void:
 	
 	#Model animations
 	if !input_spin:
-		var final_kart_rotation := Vector3(0, -y_kart_rotation, steering * 2 * deg_to_rad(avg_steering_angle))
+		var final_kart_rotation := Vector3(0, -y_kart_rotation, steering * 6 * deg_to_rad(avg_steering_angle))
 		new_kart_rotation = new_kart_rotation.lerp(final_kart_rotation, 1 - pow(0.8, 60 * delta)) #smoothly transition to new rotation
 	#TODO Move kart body z seperately from wheels and have wheels rotate in direction of turn
 	#Debug numbers
