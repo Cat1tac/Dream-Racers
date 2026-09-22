@@ -1,12 +1,29 @@
 [gd_scene format=3 uid="uid://dt5xamoe48268"]
 
+[ext_resource type="Texture2D" uid="uid://cc8ck4keppajc" path="res://icon.svg" id="1_sp1ie"]
+
 [sub_resource type="Theme" id="Theme_1ea20"]
 
 [node name="UI" type="Node" unique_id=270345837]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=515055114]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=515055114]
 
-[node name="MainMenu" type="Control" parent="CanvasLayer" unique_id=426220796]
+[node name="CloudsPlaceholder" type="ColorRect" parent="UILayer" unique_id=1634525891]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -307.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 10
+mouse_filter = 2
+color = Color(0.9529412, 0.7529412, 0.78039217, 1)
+
+[node name="MainMenu" type="Control" parent="UILayer" unique_id=426220796]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +31,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu" unique_id=1042798536]
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MainMenu" unique_id=1042798536]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,35 +39,132 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleLabel(PLACEHOLDER)" type="Label" parent="CanvasLayer/MainMenu/VBoxContainer" unique_id=1428684455]
+[node name="TitleLabel(PLACEHOLDER)" type="Label" parent="UILayer/MainMenu/VBoxContainer" unique_id=1428684455]
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 60
 text = "Dream Racers"
 horizontal_alignment = 1
 
-[node name="ButtonMargin" type="MarginContainer" parent="CanvasLayer/MainMenu/VBoxContainer" unique_id=1874748348]
+[node name="ButtonMargin" type="MarginContainer" parent="UILayer/MainMenu/VBoxContainer" unique_id=1874748348]
 layout_mode = 2
 theme_override_constants/margin_left = 300
 theme_override_constants/margin_right = 300
-theme_override_constants/margin_bottom = 120
+theme_override_constants/margin_bottom = 35
 
-[node name="ButtonVBox" type="VBoxContainer" parent="CanvasLayer/MainMenu/VBoxContainer/ButtonMargin" unique_id=307193461]
+[node name="ButtonVBox" type="VBoxContainer" parent="UILayer/MainMenu/VBoxContainer/ButtonMargin" unique_id=307193461]
 layout_mode = 2
+theme_override_constants/separation = 40
 
-[node name="RaceButton" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=933511100]
+[node name="RaceButton" type="Button" parent="UILayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=933511100]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 text = "Race"
 
-[node name="HowToPlayButton" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=294773205]
+[node name="HowToPlayButton" type="Button" parent="UILayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=294773205]
 layout_mode = 2
 theme = SubResource("Theme_1ea20")
 theme_override_font_sizes/font_size = 32
 text = "How to Play"
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=699455541]
+[node name="ExitButton" type="Button" parent="UILayer/MainMenu/VBoxContainer/ButtonMargin/ButtonVBox" unique_id=699455541]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Exit"
+
+[node name="CharacterSelect" type="Control" parent="UILayer" unique_id=1462250579]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/CharacterSelect" unique_id=674948339]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterSelectLabel" type="Label" parent="UILayer/CharacterSelect/VBoxContainer" unique_id=1936347364]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "Character Select"
+horizontal_alignment = 1
+
+[node name="CharacterPortraitMargin" type="MarginContainer" parent="UILayer/CharacterSelect/VBoxContainer" unique_id=357168198]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_constants/margin_top = 12
+
+[node name="CharacterPortraitHBox" type="HBoxContainer" parent="UILayer/CharacterSelect/VBoxContainer/CharacterPortraitMargin" unique_id=1026409782]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Character1" type="TextureButton" parent="UILayer/CharacterSelect/VBoxContainer/CharacterPortraitMargin/CharacterPortraitHBox" unique_id=654674172]
+layout_mode = 2
+texture_normal = ExtResource("1_sp1ie")
+
+[node name="Character2" type="TextureButton" parent="UILayer/CharacterSelect/VBoxContainer/CharacterPortraitMargin/CharacterPortraitHBox" unique_id=305995628]
+layout_mode = 2
+texture_normal = ExtResource("1_sp1ie")
+
+[node name="Character3" type="TextureButton" parent="UILayer/CharacterSelect/VBoxContainer/CharacterPortraitMargin/CharacterPortraitHBox" unique_id=1712271581]
+layout_mode = 2
+texture_normal = ExtResource("1_sp1ie")
+
+[node name="CharacterViewMargin" type="MarginContainer" parent="UILayer/CharacterSelect/VBoxContainer" unique_id=2033354532]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="CharacterViewHBox" type="HBoxContainer" parent="UILayer/CharacterSelect/VBoxContainer/CharacterViewMargin" unique_id=430839112]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 48
+
+[node name="CharacterView1" type="PanelContainer" parent="UILayer/CharacterSelect/VBoxContainer/CharacterViewMargin/CharacterViewHBox" unique_id=26445656]
+custom_minimum_size = Vector2(225, 225)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CharacterView2" type="PanelContainer" parent="UILayer/CharacterSelect/VBoxContainer/CharacterViewMargin/CharacterViewHBox" unique_id=875719395]
+custom_minimum_size = Vector2(225, 225)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CharacterView3" type="PanelContainer" parent="UILayer/CharacterSelect/VBoxContainer/CharacterViewMargin/CharacterViewHBox" unique_id=1495012233]
+custom_minimum_size = Vector2(225, 225)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CharacterView4" type="PanelContainer" parent="UILayer/CharacterSelect/VBoxContainer/CharacterViewMargin/CharacterViewHBox" unique_id=442354950]
+custom_minimum_size = Vector2(225, 225)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TrackSelect" type="Control" parent="UILayer" unique_id=424881822]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/TrackSelect" unique_id=162563002]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
