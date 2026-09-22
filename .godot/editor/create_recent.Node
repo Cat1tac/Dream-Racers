@@ -1,6 +1,6 @@
 MarginContainer
-PanelContainer
 ColorRect
+PanelContainer
 HBoxContainer
 Label
 TextureButton
