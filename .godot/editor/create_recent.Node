@@ -1,8 +1,8 @@
+OmniLight3D
 CollisionShape3D
 Area3D
 Timer
 CSGSphere3D
-OmniLight3D
 Node
 CSGCylinder3D
 CSGMesh3D
