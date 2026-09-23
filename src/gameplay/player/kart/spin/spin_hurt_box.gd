@@ -17,6 +17,23 @@ func _on_area_entered(area: Area3D) -> void:
 				call_knockback(spinhitbox.kart_sphere.kartCharacter.knockback)
 				call_spin_hit_slowdown(spinhitbox.drift_stage, spinhitbox.kart_sphere.kartCharacter.weight)
 				spinhitbox.call_spin_boost()
+				
+	if area.get_collision_layer_value(8):
+		kart_sphere.is_trailing = true
+	
+func _on_area_exited(area: Area3D) -> void:
+	if area.get_collision_layer_value(8):
+		kart_sphere.is_trailing = false
+	
+#func _physics_process(_delta: float) -> void:
+	#if shape_cast_3d.is_colliding():
+		#print("Colliding")
+		#var area : Area3D = shape_cast_3d.get_collider(0)
+		#print(area)
+		#if area.get_collision_layer_value(8): # gets trailing object
+			#kart_sphere.is_trailing = true
+	#else:
+		#kart_sphere.is_trailing = false
 
 func call_knockback(opposing_knockback : float) -> void:
 	shape_cast_3d.force_shapecast_update()
@@ -43,10 +60,6 @@ func apply_boost_panel_boost(boost_speed_multiplier : float, boost_time_multipli
 	kart_sphere.set_boost(boost_speed_multiplier, boost_time_multiplier)
 	if kart_sphere.drift_stage >= 3:
 		kart_sphere.boost_panels_drifted_over += 1
-
-func apply_trailing():
-	pass
-	# When in the opponents trail, the player kart will use a trail speed stat
 
 #called by kartsphere
 func setIntangiblility(state : bool) -> void:

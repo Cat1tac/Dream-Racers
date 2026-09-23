@@ -1,3 +1,5 @@
+res://src/core/autoload/
+res://src/gameplay/player/kart/trailing/
 res://src/shaders/
 res://src/gameplay/player/kart/
 res://src/tracks/

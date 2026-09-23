@@ -10,6 +10,7 @@ class_name Kart_Sphere extends RigidBody3D
 @onready var spin_hitbox: SpinHitbox = %SpinHitbox
 @onready var spin_hurt_box: SpinHurtBox = %SpinHurtBox
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+@onready var trail_spawner: Trail_Spawner = %TrailSpawner
 
 #Inputs
 var input_acceleration : float
@@ -23,6 +24,8 @@ var drift_direction : float
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var top_speed := 20.0 # Will be stat adjustable
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var reverse_top_speed := 7.5
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s^2") var acceleration := 5.0 # Will be stat adjustable
+@export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var trailing_speed := 10.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m/s^2") var trailing_acceleration := 5.0
 
 @export var brake_resistance := 10 ## How much resistance there is to forward movement when pressing in the opposite direction of the velocity
 @export var ground_resistance := 3 ## How mcuh resistance there is to forward movement when coasting
@@ -66,6 +69,7 @@ var drift_direction : float
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var boost_max_time := 1.5 # will be state adjustable
 #TODO Implement a boost curve
 
+#region variables
 var drift_just_released : bool #bool for if the kart just released drift button
 var drift_buffer_timer : float # increment timer for drift
 var snake_buffer_timer : float # increment timer for snaking
@@ -76,6 +80,8 @@ var new_drift_timer_base : float #new base timer to start from after snaking
 var boost_timer : float #increament timer for boost
 var boost_actual_speed : float #actual speed of boost
 var boost_panels_drifted_over : int = 0
+
+var is_trailing : bool
 
 var spin_timer : float
 var spin_top_speed_multiplicand : float
@@ -117,6 +123,7 @@ enum states {
 	CRASH
 }
 var state : states
+#endregion
 
 #region raycast funcs
 func on_ground() -> bool:
@@ -372,13 +379,16 @@ func _process(delta: float) -> void:
 	#Events.on_get_speed.emit(velocity.length(), drift_timer)
 	
 func _physics_process(delta: float) -> void:
+	#If the kart is going 80% or more of speed then it will drop planes behind it that give any kart that drives in it a boost of speed
+	# they will despawn after about 1 - 2 seconds 
 	if on_ground():
 		apply_central_force(-get_gravity() * mass)
 		if !body_colliding_with_ground():
 			_apply_grounded_snap_force(delta)
-			print("snapping")
+			#print("snapping")
 		else:
-			print("not snapping")
+			pass
+			#print("not snapping")
 		if !input_acceleration and linear_velocity.length() < 0.5:
 			_apply_stop(delta)
 		else:
@@ -387,6 +397,11 @@ func _physics_process(delta: float) -> void:
 	_apply_traction(delta)
 	_apply_steering(delta)
 	_do_spin(delta)
+	
+	if -center.global_basis.z.dot(linear_velocity) > top_speed * 0.5:
+		trail_spawner.active = true
+	else:
+		trail_spawner.active = false
 	
 #endregion
 	
@@ -424,35 +439,59 @@ func _apply_forward_force(_delta : float) -> void:
 	var vel := forward.dot(linear_velocity)
 	var force_vector : Vector3
 	
-	if sign(input_acceleration) != sign(vel) and input_acceleration != 0 and sign(vel) != 0:
-		#brake
-		force_vector = -forward * brake_resistance * signf(vel) * mass
-	elif boost_timer + dreamcatcher_boost_timer > 0 and abs(vel) < boost_actual_speed + dreamcatcher_boost:
-		#boost
-		force_vector = boost_acceleration * forward * mass
-	elif input_spin and !dreamcatcher_boost and boost_timer <= 0:
-		#spin
-		if abs(vel) < speed_right_before_spin * 0.8:
-			force_vector = input_acceleration * acceleration * forward * mass
-		else:
-			force_vector = -forward * ground_resistance * 1.3 * signf(vel) * mass
-	elif input_acceleration > 0 && abs(vel) < top_speed + dreamcatcher_boost:
-		#forward
-		force_vector = input_acceleration * (acceleration + dreamcatcher_acceleration) * forward * mass
-	elif input_acceleration < 0 && abs(vel) < reverse_top_speed:
-		#backward
-		force_vector = input_acceleration * acceleration * forward * mass
-	elif abs(vel) > 0.05:
+	
+	apply_central_force(60 * _calculate_force_vector(forward, vel) * _delta)
+	#print(force_vector)
+	DebugDraw.draw_line(global_position, global_position + force_vector, Color(0.0, 0.0, 255, 1.0))
+	Events.on_get_speed.emit(vel, drift_timer)
+
+func _calculate_force_vector(forward : Vector3, vel : float) -> Vector3:
+	var force_vector : Vector3
+	var final_top_speed : float = top_speed
+	var final_acceleration : float = acceleration
+	
+	if abs(vel) > 0.05 and input_acceleration == 0: # no input
 		#drag
 		if input_drift:
 			#don't lose as much speed while drifting and not accelerating
 			force_vector = -forward * (ground_resistance/2.0) * signf(vel) * mass
 		else:
 			force_vector = -forward * ground_resistance * signf(vel) * mass
-	apply_central_force(60 * ((force_vector) * _delta))
-	print(force_vector)
-	DebugDraw.draw_line(global_position, global_position + force_vector, Color(0.0, 0.0, 255, 1.0))
-	Events.on_get_speed.emit(vel, drift_timer)
+		return force_vector
+	
+	if sign(input_acceleration) != sign(vel) and input_acceleration != 0 and sign(vel) != 0: # input and vel are opposite signs
+		#brake
+		force_vector = -forward * brake_resistance * signf(vel) * mass
+		return force_vector
+		
+	if input_spin and !dreamcatcher_boost and boost_timer <= 0: # Spin but did not hit anything
+		#spin
+		if abs(vel) < speed_right_before_spin * 0.8:
+			force_vector = input_acceleration * acceleration * forward * mass
+		else:
+			force_vector = -forward * ground_resistance * 1.3 * signf(vel) * mass
+		return force_vector
+			
+	if input_acceleration > 0: #forward
+		if boost_timer > 0: 
+			final_acceleration = boost_acceleration
+			final_top_speed = boost_actual_speed
+			
+		if dreamcatcher_boost_timer > 0:
+			final_acceleration += dreamcatcher_acceleration
+			final_top_speed += dreamcatcher_boost
+		
+		if is_trailing:
+			final_acceleration += trailing_acceleration
+			final_top_speed += trailing_speed
+		
+	if input_acceleration < 0: #backwards
+		final_top_speed = reverse_top_speed
+	
+	if abs(vel) < final_top_speed:
+		force_vector = input_acceleration * forward * final_acceleration * mass
+		
+	return force_vector
 
 func _apply_steering(delta : float) -> void:
 	#center.rotate_y(0.1 * input_steering)
