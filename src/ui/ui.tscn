@@ -951,17 +951,14 @@ script = ExtResource("1_qemve")
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=515055114]
 
 [node name="CloudsPlaceholder" type="ColorRect" parent="UILayer" unique_id=1634525891]
-anchors_preset = 7
-anchor_left = 0.5
+custom_minimum_size = Vector2(0, 300)
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -576.0
-offset_top = -308.0
-offset_right = 576.0
 grow_horizontal = 2
 grow_vertical = 0
-size_flags_vertical = 10
+size_flags_vertical = 3
 mouse_filter = 2
 color = Color(0.9529412, 0.7529412, 0.78039217, 1)
 metadata/_edit_lock_ = true
@@ -991,11 +988,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
+metadata/_edit_use_anchors_ = true
 
 [node name="(PLACEHOLDER)TitleFrame" type="PanelContainer" parent="UILayer/MainMenu/VBoxContainer" unique_id=642017524]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8wxmc")
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer/MainMenu/VBoxContainer/(PLACEHOLDER)TitleFrame" unique_id=896040176]
