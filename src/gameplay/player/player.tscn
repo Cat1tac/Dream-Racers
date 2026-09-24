@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://jxikcugtw0ye" path="res://src/gameplay/player/spin_hurt_box.gd" id="6_xdbtd"]
 [ext_resource type="Curve" uid="uid://dxngmn0p8jwfa" path="res://src/gameplay/player/kart/curves/drift_charge_curve.tres" id="7_uia4o"]
 [ext_resource type="Curve" uid="uid://c7dw4nbq13umj" path="res://src/gameplay/player/kart/curves/spin_curve.tres" id="8_rdc6l"]
+[ext_resource type="PackedScene" uid="uid://cyqurrxts27ql" path="res://src/gameplay/player/local_lap_logic.tscn" id="11_nem4e"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xdbtd"]
 height = 0.2
@@ -122,13 +123,36 @@ snap_cast = NodePath("../Center/SnapRay")
 wall_cast = NodePath("../Center/WallRay")
 particlesManager = [NodePath("../Center/KartModel/BoostCharge"), NodePath("../Center/KartModel/BoostCharge2")]
 top_speed = 25.0
+reverse_top_speed = null
+acceleration = null
+brake_resistance = null
+ground_resistance = null
+max_steering_angle_slow = null
+max_steering_angle_fast = null
+air_steering_velocity = null
+wheel_base = null
+traction_factor = null
+drift_multiplier = null
+drift_buffer = null
+snake_buffer = null
 drift_charge_curve = ExtResource("7_uia4o")
+spin_length = null
 spin_curve = ExtResource("8_rdc6l")
+spin_cooldown = null
+spin_hit_slowdown_amounts = null
+knockback = null
+boost_acceleration = null
+boost_top_speed = null
+boosts = null
 boost_max_time = 1.7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Kart_Sphere" unique_id=199179411]
 shape = SubResource("SphereShape3D_uia4o")
 debug_color = Color(0, 0.6149741, 0.6062328, 0.41960785)
 
+[node name="LocalLapLogic" parent="." unique_id=1204157281 instance=ExtResource("11_nem4e")]
+
 [connection signal="area_entered" from="Center/SpinHitbox" to="Center/SpinHitbox" method="_on_area_entered"]
 [connection signal="area_entered" from="Center/SpinHurtBox" to="Center/SpinHurtBox" method="_on_area_entered"]
+[connection signal="checkpoint_crossed" from="Kart_Sphere" to="LocalLapLogic" method="_on_kart_sphere_checkpoint_crossed"]
+[connection signal="lap_completed" from="Kart_Sphere" to="LocalLapLogic" method="_on_kart_sphere_lap_completed"]

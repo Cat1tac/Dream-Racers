@@ -105,9 +105,9 @@ var current_rotation : float
 var max_turn_angle : float
 
 #Progress Manager
-var checks_needed : int = 5 #How many checkpoints are in the track (not counting StartLine)
+signal lap_completed
+signal checkpoint_crossed
 var progress : Array[int] #Stores each checkpoint instance ID the player has passed
-var laps_done : int
 
 #Externals
 var controls : PlayerControls
@@ -559,34 +559,13 @@ func _apply_grounded_snap_force(delta : float) -> void:
 
 #region track progress
 
-# Tells object how many checkpoints they must hit in order to gain a lap based on number of
-# checkpoint instances there are in a stage
-# Currently not implemented :(
-func setup_lap_logic(vc: int) -> void:
-	checks_needed = vc
-	
-
 # When player crosses the start line, the lap count will be increased if enough progress has been made
 # Nothing will happen if the player has not made enough progress
 func complete_lap() -> void:
+	lap_completed.emit(progress)
 	print("LapLogic: crossed start line")
-	
-	if len(progress) == checks_needed:
-		progress.clear()
-		laps_done += 1
-		print("LapLogic: lap #" + str(laps_done) + " completed!! yay!!")
-	else:
-		print("LapLogic: Player does not have the corrent amount of progress")
 
 func add_checkpoint(cp_id: int) -> void:
-	if cp_id not in progress:
-		progress.append(cp_id)
-		
-		#Testing purposed, redo when finished
-		var _size = len(progress)
-		print("LapLogic: Checkpoint #" + str(_size) + " was crossed (id: " + str(cp_id) + ")")
-	
-
-	
+	checkpoint_crossed.emit(cp_id, progress)
 
 #endregion
