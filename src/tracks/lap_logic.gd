@@ -2,12 +2,7 @@ extends Node
 
 @onready var checkpoints: Node = $Checkpoints
 
-
 var check_list: Array[int]
-# Calls the complete_lap() function in kart_rigidbody_sphere when StartLine is collided with
-func _on_start_line_body_entered(body: Node3D) -> void:
-	if body is Kart_Sphere:
-		body.complete_lap()
 
 # Debug function, prints instance id of each checkpoint in order
 func print_checks() -> void:
@@ -18,3 +13,9 @@ func print_checks() -> void:
 
 func log_checkpoints(check_id) -> void:
 	check_list.append(check_id)
+
+func _on_start_line_area_entered(area: Area3D) -> void:
+		if area is LocalLapLogic:
+			area.complete_lap()
+			if not area.race_started():
+				area.get_check_order(check_list)

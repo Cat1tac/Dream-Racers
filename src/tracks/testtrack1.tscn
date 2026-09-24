@@ -131,4 +131,4 @@ transform = Transform3D(-0.99998903, 0, 0.0046916306, 0, 1, 0, -0.0046916306, 0,
 [node name="Checkpoint5" parent="LapLogic/Checkpoints" unique_id=20632048 instance=ExtResource("8_5ryjy")]
 transform = Transform3D(-0.99998903, 0, 0.0046916306, 0, 1, 0, -0.0046916306, 0, -0.99998903, -57.290894, 2.4219437, 104.632484)
 
-[connection signal="body_entered" from="LapLogic/StartLine" to="LapLogic" method="_on_start_line_body_entered"]
+[connection signal="area_entered" from="LapLogic/StartLine" to="LapLogic" method="_on_start_line_area_entered"]

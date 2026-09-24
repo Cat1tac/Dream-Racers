@@ -1,6 +1,6 @@
-Node
 CollisionShape3D
 Area3D
+Node
 CSGCylinder3D
 CSGMesh3D
 ShapeCast3D

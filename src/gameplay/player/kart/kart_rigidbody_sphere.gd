@@ -104,11 +104,6 @@ var crash_end_velocity : Vector3
 var current_rotation : float 
 var max_turn_angle : float
 
-#Progress Manager
-signal lap_completed
-signal checkpoint_crossed
-var progress : Array[int] #Stores each checkpoint instance ID the player has passed
-
 #Externals
 var controls : PlayerControls
 var kartCharacter : Character
@@ -258,7 +253,7 @@ func remove_drift_charge() -> void:
 	new_drift_timer_base = 0.0
 	boost_panels_drifted_over = 0
 #endregion
-	
+
 #region Spin
 ## Executes spin and controls spin cooldown
 func _do_spin(delta : float) -> void:
@@ -555,17 +550,4 @@ func _apply_grounded_snap_force(delta : float) -> void:
 	var down_force := -(limited_down_accel * mass)
 	
 	apply_central_force(up * down_force)
-#endregion
-
-#region track progress
-
-# When player crosses the start line, the lap count will be increased if enough progress has been made
-# Nothing will happen if the player has not made enough progress
-func complete_lap() -> void:
-	lap_completed.emit(progress)
-	print("LapLogic: crossed start line")
-
-func add_checkpoint(cp_id: int) -> void:
-	checkpoint_crossed.emit(cp_id, progress)
-
 #endregion

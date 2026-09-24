@@ -2,3 +2,8 @@ res://src/tracks/testtrack1.tscn
 res://local_lap_logic.gd
 res://src/gameplay/player/player.tscn
 res://src/gameplay/player/kart/kart_rigidbody_sphere.gd
+res://src/tracks/lap_logic.gd
+res://src/gameplay/player/local_lap_logic_manager.gd
+res://src/gameplay/player/local_lap_logic.gd
+res://checkpoint.gd
+res://src/gameplay/objects/checkpoint.tscn
