@@ -9,7 +9,7 @@ class_name SpinHitbox extends Area3D
 
 var parent : Player
 var hitbox_active := false
-var drift_stage : int
+var charge_level : int
 var hit_dreamcatcher := false
 
 var collision_point : Vector3
@@ -24,6 +24,7 @@ func set_active(state : bool) -> void:
 	
 #called by dreamcatcher
 func call_spin_boost() -> void:
+	print(charge_level)
 	kart_sphere.dreamcatcher_spin_boost()
 
 #called by dreamcatcher

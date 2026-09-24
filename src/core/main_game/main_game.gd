@@ -28,7 +28,7 @@ var _current_level : BaseLevel = null
 @onready var debug_root: Control = %DebugRoot
 
 func _ready() -> void:
-	_init_players(2)
+	_init_players(1)
 	# There will be a track set up script that will contain all the info on setting up the track
 	#Will contain the selected track, selected character, what control scheme to use for each character, and any track specific settings 
 	load_level(TEST_TRACK_1)

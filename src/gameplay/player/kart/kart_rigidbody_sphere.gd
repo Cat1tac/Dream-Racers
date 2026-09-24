@@ -73,6 +73,7 @@ var drift_direction : float
 var drift_just_released : bool #bool for if the kart just released drift button
 var drift_buffer_timer : float # increment timer for drift
 var snake_buffer_timer : float # increment timer for snaking
+var snake_penalty_amt : float # penalty for snaking
 var just_started_drift : bool # check whether the kart should start the drift buffer
 var drift_stage : int #level of drift
 var drift_timer : float #increament timer for drift
@@ -80,6 +81,14 @@ var new_drift_timer_base : float #new base timer to start from after snaking
 var boost_timer : float #increament timer for boost
 var boost_actual_speed : float #actual speed of boost
 var boost_panels_drifted_over : int = 0
+
+var stored_charge_level : int = 0
+var boost_panels_driven_over_store : int = 0
+var boost_panels_driven_over_timer : float = 0.2
+var boost_panels_driven_over_increment : float
+
+var charge_level : int
+#make varaiable called charge level that takes whatever the current highest num is between the drift_stage and stored charge and boosting and spinning logic will use that instead of drift stage
 
 var is_trailing : bool
 
@@ -173,9 +182,40 @@ func _handle_input() -> void:
 			speed_right_before_spin = forward.dot(linear_velocity) if forward.dot(linear_velocity) < top_speed else top_speed
 			#apply_slowdown_force(0.25)
 			input_spin = true
+			
+	if Input.is_action_just_pressed(controls.store):
+		if stored_charge_level == 0: # Put charge in store
+			stored_charge_level = drift_stage if drift_stage >= 3 else 0
+			
+			if stored_charge_level == 4:
+				boost_panels_driven_over_store = 1
+			elif stored_charge_level == 5:
+				boost_panels_driven_over_store = 3
+			elif stored_charge_level == 6:
+				boost_panels_driven_over_store = 6
+				
+		elif boost_panels_driven_over_increment > 0 and stored_charge_level >= 3: # increase stored charge
+			boost_panels_driven_over_store += 1
+			
+			if boost_panels_driven_over_store == 1 and stored_charge_level < 4:
+				stored_charge_level = 4
+			elif boost_panels_driven_over_store == 3 and stored_charge_level < 5:
+				stored_charge_level = 5
+			elif boost_panels_driven_over_store == 6 and stored_charge_level < 6:
+				stored_charge_level = 6
+				
+		elif stored_charge_level >= 3 and boost_panels_driven_over_increment <= 0: # use stored charge
+			_execute_boost(stored_charge_level)
+			_remove_stored_charge()
+		print(stored_charge_level)
+			
+	# if store is just pressed
+	# if store is 0 set store to current drift stage if it is above 2
+	# if store is not 0 then check if store increase timer is active. if it is then increase the "panels drifted over while stored" var by one
+	# otherwise use stored charge  
 
 
-#region Drift / Boost
+#region Drift / Boost / Store Charge
 func _drift_boost_control(delta : float) -> void:
 	if drift_just_released: #Controls Drift Boost release and snaking
 		
@@ -184,12 +224,13 @@ func _drift_boost_control(delta : float) -> void:
 				drift_direction = sign(input_steering)
 				
 				if drift_direction != 0:
-					drift_timer = new_drift_timer_base if drift_timer - 0.3 < new_drift_timer_base else drift_timer - 0.35 
+					# Subtracts from drift timer if you change directions while mid-drift
+					drift_timer = new_drift_timer_base if drift_timer - 0.3 < new_drift_timer_base else drift_timer - snake_penalty_amt 
 					drift_just_released = false 
 					snake_buffer_timer = 0.0
 			snake_buffer_timer += delta
 		else:
-			_execute_drift_boost()
+			_execute_boost(drift_stage)
 	else: #Controls Initial Drift buffer
 		if input_drift and drift_direction == 0: # start drift buffer
 			if drift_buffer_timer < drift_buffer:
@@ -208,25 +249,39 @@ func _drift_boost_control(delta : float) -> void:
 	#Controls Drift Charge
 	if input_drift and on_ground():
 		drift_timer += abs(angular_speed + kartCharacter.drift_charge_speed) * delta
-		#Base boost
-		if drift_timer > drift_charge_curve.get_point_position(1).x and drift_stage < 1:
-			new_drift_timer_base = drift_charge_curve.get_point_position(1).x
-			_set_drifting_stage(1)
-		elif drift_timer > drift_charge_curve.get_point_position(2).x and drift_stage < 2:
-			new_drift_timer_base = drift_charge_curve.get_point_position(2).x
-			_set_drifting_stage(2)
-		elif drift_timer > drift_charge_curve.max_value and drift_stage < 3:
-			new_drift_timer_base = drift_charge_curve.max_value
-			_set_drifting_stage(3)
 		
-		#Boost panel boost
-		if drift_stage >= 3:
-			if boost_panels_drifted_over == 1 and drift_stage < 4:
-				_set_drifting_stage(4)
-			elif boost_panels_drifted_over == 3 and drift_stage < 5:
-				_set_drifting_stage(5)
-			elif boost_panels_drifted_over == 6 and drift_stage < 6:
-				_set_drifting_stage(6)
+		if stored_charge_level > 0:
+			if drift_stage > 2:
+				drift_timer = 0
+				_set_drifting_stage(-1)
+			
+			if drift_timer > drift_charge_curve.get_point_position(1).x and drift_stage < 1:
+				new_drift_timer_base = drift_charge_curve.get_point_position(1).x
+				_set_drifting_stage(1)
+			elif drift_timer > drift_charge_curve.get_point_position(2).x and drift_stage < 2:
+				new_drift_timer_base = drift_charge_curve.get_point_position(2).x
+				_set_drifting_stage(2)
+				
+		else:
+			#Base boost
+			if drift_timer > drift_charge_curve.get_point_position(1).x and drift_stage < 1:
+				new_drift_timer_base = drift_charge_curve.get_point_position(1).x
+				_set_drifting_stage(1)
+			elif drift_timer > drift_charge_curve.get_point_position(2).x and drift_stage < 2:
+				new_drift_timer_base = drift_charge_curve.get_point_position(2).x
+				_set_drifting_stage(2)
+			elif drift_timer > drift_charge_curve.max_value and drift_stage < 3:
+				new_drift_timer_base = drift_charge_curve.max_value
+				_set_drifting_stage(3)
+			
+			#Boost panel boost
+			if drift_stage >= 3:
+				if boost_panels_drifted_over == 1 and drift_stage < 4:
+					_set_drifting_stage(4)
+				elif boost_panels_drifted_over == 3 and drift_stage < 5:
+					_set_drifting_stage(5)
+				elif boost_panels_drifted_over == 6 and drift_stage < 6:
+					_set_drifting_stage(6)
 		
 	#Boost timer Countdown
 	if boost_timer > 0:
@@ -236,11 +291,11 @@ func _set_drifting_stage(stage : int) -> void:
 	for particle in particlesManager:
 		particle.set_drifting_stage(stage)
 	drift_stage = stage
-	spin_hitbox.drift_stage = stage
+	
 	#print(boost_panels_drifted_over)
 
-func _execute_drift_boost() -> void: 
-	var boostlevel : int = drift_stage
+func _execute_boost(charge_to_use : int) -> void: 
+	var boostlevel : int = charge_to_use
 	if boostlevel > 0:
 		var speedMultiplier : float = boosts[boostlevel]["dftSpdFactor"]
 		var timeMultiplier : float = boosts[boostlevel]["dftTimeFactor"]
@@ -259,6 +314,27 @@ func remove_drift_charge() -> void:
 	drift_timer = 0.0
 	new_drift_timer_base = 0.0
 	boost_panels_drifted_over = 0
+
+#Stored Charge
+func start_store_charge_boost_panel_timer() -> void:
+	boost_panels_driven_over_increment = boost_panels_driven_over_timer
+
+func _decrement_boost_panel_store_charge_timer(delta : float) -> void:
+	if boost_panels_driven_over_increment > 0.0:
+		boost_panels_driven_over_increment -= delta
+
+func _remove_stored_charge() -> void:
+	stored_charge_level = 0
+	boost_panels_driven_over_store = 0
+	boost_panels_driven_over_increment = 0
+
+func _get_charge_level() -> void:
+	if drift_stage >= stored_charge_level:
+		charge_level = drift_stage
+	else:
+		charge_level = stored_charge_level
+		
+	spin_hitbox.charge_level = charge_level
 #endregion
 	
 #region Spin
@@ -279,6 +355,7 @@ func _do_spin(delta : float) -> void:
 			if !spin_hitbox.hit_dreamcatcher:
 				spin_cooldown_timer = spin_cooldown
 				remove_drift_charge()
+				_remove_stored_charge()
 				
 	spin_hitbox.set_active(input_spin)
 			
@@ -289,7 +366,7 @@ func _do_spin(delta : float) -> void:
 		dreamcatcher_acceleration = 0
 		
 func dreamcatcher_spin_boost() -> void:
-	var boostlevel : int = drift_stage
+	var boostlevel : int = charge_level
 	if boostlevel < 1:
 		boostlevel = 1
 		
@@ -376,6 +453,8 @@ func _process(delta: float) -> void:
 	
 	_handle_input()
 	_drift_boost_control(delta)
+	_decrement_boost_panel_store_charge_timer(delta)
+	_get_charge_level()
 	#Events.on_get_speed.emit(velocity.length(), drift_timer)
 	
 func _physics_process(delta: float) -> void:

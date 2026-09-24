@@ -15,7 +15,7 @@ func _on_area_entered(area: Area3D) -> void:
 			if !spinIntangiblility:
 				print("hit")
 				call_knockback(spinhitbox.kart_sphere.kartCharacter.knockback)
-				call_spin_hit_slowdown(spinhitbox.drift_stage, spinhitbox.kart_sphere.kartCharacter.weight)
+				call_spin_hit_slowdown(spinhitbox.charge_level, spinhitbox.kart_sphere.kartCharacter.weight)
 				spinhitbox.call_spin_boost()
 				
 	if area.get_collision_layer_value(8):
@@ -58,6 +58,7 @@ func call_stop() -> void:
 
 func apply_boost_panel_boost(boost_speed_multiplier : float, boost_time_multiplier : float) -> void: ## Applies speed boost and from boost panel
 	kart_sphere.set_boost(boost_speed_multiplier, boost_time_multiplier)
+	kart_sphere.start_store_charge_boost_panel_timer()
 	if kart_sphere.drift_stage >= 3:
 		kart_sphere.boost_panels_drifted_over += 1
 

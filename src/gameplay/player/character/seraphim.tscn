@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bmnkxudigxc8i" path="res://assets/models/characters/Seraphim/Seraphim.glb" id="1_84gts"]
 [ext_resource type="Texture2D" uid="uid://civ3k51gr8fif" path="res://assets/models/characters/Seraphim/BaseColor.png" id="2_5waya"]
+[ext_resource type="PackedScene" uid="uid://cmw4ypmksqpsy" path="res://src/gameplay/player/kart/basekart.tscn" id="2_rbgkn"]
 [ext_resource type="Texture2D" uid="uid://etfqx70246xe" path="res://assets/models/characters/Seraphim/HaloEmission.png" id="3_rbgkn"]
 [ext_resource type="Texture2D" uid="uid://cf65igkko80ac" path="res://assets/models/characters/Seraphim/Seraphim_CoolShoe.png" id="4_n7qul"]
 
@@ -363,25 +364,57 @@ shader_parameter/fresnel_on = false
 shader_parameter/fresnel_amount = 99.9999977648
 
 [node name="Seraphim" unique_id=1624741116 instance=ExtResource("1_84gts")]
+transform = Transform3D(0.93859786, 0.34501305, 0, -0.34501305, 0.93859786, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Blush" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(1011420498) index="0" unique_id=1208620163]
+[node name="kart" parent="." index="0" unique_id=2060035001 instance=ExtResource("2_rbgkn")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0.15254214, -0.028191343)
+
+[node name="Armature" parent="." index="1" unique_id=1035499628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.011041164)
+
+[node name="Skeleton3D" parent="Armature" index="0" unique_id=1011420498]
+bones/1/position = Vector3(4.521064e-08, -0.031775683, -0.07622989)
+bones/1/rotation = Quaternion(0.15110697, 0.68540585, -0.60395867, 0.37764996)
+bones/1/scale = Vector3(1, 0.99999994, 1.0000001)
+bones/2/rotation = Quaternion(0.7694693, 0.19437404, -0.025309632, 0.6078611)
+bones/2/scale = Vector3(1, 1.0000004, 0.99999994)
+bones/3/position = Vector3(-0.118377656, 0.09615826, -0.071728006)
+bones/3/rotation = Quaternion(-0.6290682, 0.19046618, 0.1786556, 0.7321735)
+bones/3/scale = Vector3(1.0000002, 0.9999996, 0.99999994)
+bones/4/rotation = Quaternion(0.59420234, 0.32797462, -0.24337769, 0.6929095)
+bones/4/scale = Vector3(1, 1.0000002, 1.0000002)
+bones/5/rotation = Quaternion(0.39145553, 0.07169613, 0.010379093, 0.917341)
+bones/5/scale = Vector3(1.0000001, 0.99999994, 0.9999999)
+bones/6/position = Vector3(0.1470834, 0.20934872, 0.01853168)
+bones/6/rotation = Quaternion(-0.56497157, -0.113628946, -0.24673513, 0.77911323)
+bones/6/scale = Vector3(1.0000002, 1.0000001, 1.0000017)
+bones/7/rotation = Quaternion(-0.01606092, -0.29591486, -0.061979774, 0.9530661)
+bones/7/scale = Vector3(0.99999994, 1.0000004, 1.0000001)
+bones/15/scale = Vector3(1, 1, 1)
+
+[node name="Blush" parent="Armature/Skeleton3D" index="0" unique_id=1208620163]
 surface_material_override/0 = SubResource("ShaderMaterial_i05pn")
 
-[node name="Body" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(1011420498) index="1" unique_id=628057526]
+[node name="Body" parent="Armature/Skeleton3D" index="1" unique_id=628057526]
 surface_material_override/0 = SubResource("ShaderMaterial_f0mi7")
 
-[node name="Eyeball" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(1011420498) index="2" unique_id=422147792]
+[node name="Eyeball" parent="Armature/Skeleton3D" index="2" unique_id=422147792]
 surface_material_override/0 = SubResource("ShaderMaterial_i05pn")
 
-[node name="Halo" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(1011420498) index="3" unique_id=803739758]
+[node name="Halo" parent="Armature/Skeleton3D" index="3" unique_id=803739758]
 surface_material_override/0 = SubResource("ShaderMaterial_lesy5")
 
-[node name="Pupil & Shine" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(1011420498) index="4" unique_id=1688435734]
+[node name="Pupil & Shine" parent="Armature/Skeleton3D" index="4" unique_id=1688435734]
 surface_material_override/0 = SubResource("ShaderMaterial_1x352")
 surface_material_override/1 = SubResource("ShaderMaterial_ckdt2")
 
-[node name="ShoeL" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(1011420498) index="5" unique_id=2120106938]
+[node name="ShoeL" parent="Armature/Skeleton3D" index="5" unique_id=2120106938]
+transform = Transform3D(0.9022284, 0, 0.43125847, 0, 1, 0, -0.43125847, 0, 0.9022284, 0, 0, 0)
 surface_material_override/0 = SubResource("ShaderMaterial_4bx31")
 
-[node name="ShoeR" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(1011420498) index="6" unique_id=1096740454]
+[node name="ShoeR" parent="Armature/Skeleton3D" index="6" unique_id=1096740454]
+transform = Transform3D(0.93283004, 0, -0.36031672, 0, 1, 0, 0.36031672, 0, 0.93283004, 0, 0, 0)
 surface_material_override/0 = SubResource("ShaderMaterial_4bx31")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="2" unique_id=371308503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9682285, 0.2635615, 0.18013954)
