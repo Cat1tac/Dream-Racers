@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c7hrqc4lwuvyo"]
+
+[ext_resource type="Shader" uid="uid://cmy3tvafck7h0" path="res://src/shaders/changeGradientColor.gdshader" id="1_cjsqc"]
+[ext_resource type="Texture2D" uid="uid://5c7g1b2beiti" path="res://assets/ui/main menu/gradients/sunset_gradient.tres" id="2_01sja"]
+[ext_resource type="Texture2D" uid="uid://dap40omm61pyj" path="res://assets/ui/main menu/base images/skybggradient.png" id="2_m08ws"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_expqt"]
+shader = ExtResource("1_cjsqc")
+shader_parameter/use_base_texture = true
+shader_parameter/target_gradient = ExtResource("2_01sja")
+shader_parameter/gradient_control = 0.9999999747
+
+[node name="Control" type="Control" unique_id=1665049764]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1876432076]
+material = SubResource("ShaderMaterial_expqt")
+layout_mode = 0
+offset_right = 3840.0
+offset_bottom = 2160.0
+texture = ExtResource("2_m08ws")

@@ -177,6 +177,7 @@ func _handle_input() -> void:
 	if Input.is_action_just_pressed(controls.spin):
 		if spin_cooldown_timer <= 0:
 			spin_hitbox.hit_dreamcatcher = false
+			spin_hitbox.hit_shortcut = false
 			spin_hurt_box.setIntangiblility(true)
 			var forward := -center.global_basis.z
 			speed_right_before_spin = forward.dot(linear_velocity) if forward.dot(linear_velocity) < top_speed else top_speed
@@ -352,10 +353,11 @@ func _do_spin(delta : float) -> void:
 			spin_timer = 0.0
 			input_spin = false
 			spin_hurt_box.setIntangiblility(false)
-			if !spin_hitbox.hit_dreamcatcher:
+			if !spin_hitbox.hit_dreamcatcher: # if hitbox did not hit dreamcatcher remove all charge
 				spin_cooldown_timer = spin_cooldown
 				remove_drift_charge()
 				_remove_stored_charge()
+				
 				
 	spin_hitbox.set_active(input_spin)
 			

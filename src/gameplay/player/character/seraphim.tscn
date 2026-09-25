@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bmnkxudigxc8i" path="res://assets/models/characters/Seraphim/Seraphim.glb" id="1_84gts"]
 [ext_resource type="Texture2D" uid="uid://civ3k51gr8fif" path="res://assets/models/characters/Seraphim/BaseColor.png" id="2_5waya"]
 [ext_resource type="PackedScene" uid="uid://cmw4ypmksqpsy" path="res://src/gameplay/player/kart/basekart.tscn" id="2_rbgkn"]
+[ext_resource type="Texture2D" uid="uid://b8bmrjgywntr3" path="res://assets/models/characters/Seraphim/BaseColorUpdated.png" id="3_n7qul"]
 [ext_resource type="Texture2D" uid="uid://etfqx70246xe" path="res://assets/models/characters/Seraphim/HaloEmission.png" id="3_rbgkn"]
 [ext_resource type="Texture2D" uid="uid://cf65igkko80ac" path="res://assets/models/characters/Seraphim/Seraphim_CoolShoe.png" id="4_n7qul"]
 
@@ -108,7 +109,7 @@ render_priority = 0
 next_pass = SubResource("StandardMaterial3D_gq25g")
 shader = SubResource("Shader_nh4bs")
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("2_5waya")
+shader_parameter/texture_albedo = ExtResource("3_n7qul")
 shader_parameter/albedo_texture_size = Vector2i(0, 0)
 shader_parameter/point_size = 0.10000000149012
 shader_parameter/roughness = 1.0
@@ -149,15 +150,12 @@ offsets = PackedFloat32Array(0.5534884, 0.572093)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_v4e8c"]
 gradient = SubResource("Gradient_0o48m")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mv1lk"]
-load_path = "res://.godot/imported/BaseColor.png-a53db71f5368058a9806f08f1d77ca04.s3tc.ctex"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f0mi7"]
 render_priority = 0
 next_pass = SubResource("StandardMaterial3D_bv5ff")
 shader = SubResource("Shader_nh4bs")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = SubResource("CompressedTexture2D_mv1lk")
+shader_parameter/albedo = Color(0.9821753, 0.9821753, 0.9821753, 1)
+shader_parameter/texture_albedo = ExtResource("3_n7qul")
 shader_parameter/albedo_texture_size = Vector2i(0, 0)
 shader_parameter/point_size = 0.10000000149012
 shader_parameter/roughness = 1.0
@@ -198,15 +196,12 @@ offsets = PackedFloat32Array(0.5534884, 0.572093)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_cak7g"]
 gradient = SubResource("Gradient_skxy4")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ftjaw"]
-load_path = "res://.godot/imported/BaseColor.png-a53db71f5368058a9806f08f1d77ca04.s3tc.ctex"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lesy5"]
 render_priority = 0
 next_pass = SubResource("StandardMaterial3D_t677u")
 shader = SubResource("Shader_nh4bs")
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = SubResource("CompressedTexture2D_ftjaw")
+shader_parameter/texture_albedo = ExtResource("3_n7qul")
 shader_parameter/albedo_texture_size = Vector2i(0, 0)
 shader_parameter/point_size = 0.10000000149012
 shader_parameter/roughness = 1.0
@@ -253,7 +248,7 @@ render_priority = 0
 next_pass = SubResource("StandardMaterial3D_pbqu7")
 shader = SubResource("Shader_nh4bs")
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("2_5waya")
+shader_parameter/texture_albedo = ExtResource("3_n7qul")
 shader_parameter/albedo_texture_size = Vector2i(0, 0)
 shader_parameter/point_size = 0.10000000149012
 shader_parameter/roughness = 1.0
@@ -369,50 +364,49 @@ transform = Transform3D(0.93859786, 0.34501305, 0, -0.34501305, 0.93859786, 0, 0
 [node name="kart" parent="." index="0" unique_id=2060035001 instance=ExtResource("2_rbgkn")]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0.15254214, -0.028191343)
 
-[node name="Armature" parent="." index="1" unique_id=1035499628]
+[node name="Armature" parent="." index="1" unique_id=371242896]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.011041164)
 
-[node name="Skeleton3D" parent="Armature" index="0" unique_id=1011420498]
-bones/1/position = Vector3(4.521064e-08, -0.031775683, -0.07622989)
-bones/1/rotation = Quaternion(0.15110697, 0.68540585, -0.60395867, 0.37764996)
-bones/1/scale = Vector3(1, 0.99999994, 1.0000001)
-bones/2/rotation = Quaternion(0.7694693, 0.19437404, -0.025309632, 0.6078611)
-bones/2/scale = Vector3(1, 1.0000004, 0.99999994)
-bones/3/position = Vector3(-0.118377656, 0.09615826, -0.071728006)
-bones/3/rotation = Quaternion(-0.6290682, 0.19046618, 0.1786556, 0.7321735)
-bones/3/scale = Vector3(1.0000002, 0.9999996, 0.99999994)
-bones/4/rotation = Quaternion(0.59420234, 0.32797462, -0.24337769, 0.6929095)
-bones/4/scale = Vector3(1, 1.0000002, 1.0000002)
-bones/5/rotation = Quaternion(0.39145553, 0.07169613, 0.010379093, 0.917341)
-bones/5/scale = Vector3(1.0000001, 0.99999994, 0.9999999)
-bones/6/position = Vector3(0.1470834, 0.20934872, 0.01853168)
-bones/6/rotation = Quaternion(-0.56497157, -0.113628946, -0.24673513, 0.77911323)
-bones/6/scale = Vector3(1.0000002, 1.0000001, 1.0000017)
-bones/7/rotation = Quaternion(-0.01606092, -0.29591486, -0.061979774, 0.9530661)
-bones/7/scale = Vector3(0.99999994, 1.0000004, 1.0000001)
-bones/15/scale = Vector3(1, 1, 1)
+[node name="Skeleton3D" parent="Armature" index="0" unique_id=745863128]
+transform = Transform3D(1.0000006, 1.4901161e-07, 0, -1.4901161e-07, 1.0000006, 0, 0, 0, 1, 0, 0, 0)
+bones/1/rotation = Quaternion(0.34216377, 0.6934352, -0.50143933, 0.3881111)
+bones/1/scale = Vector3(0.99999994, 0.9999999, 1)
+bones/2/rotation = Quaternion(0.6573828, 0.1455672, 0.13152447, 0.7275709)
+bones/2/scale = Vector3(1.0000002, 0.99999976, 1)
+bones/3/position = Vector3(-0.100145005, 0.1653399, 1.0142685e-08)
+bones/3/rotation = Quaternion(-0.5990678, -1.1264932e-08, 8.3459675e-08, 0.80069834)
+bones/3/scale = Vector3(1.0000001, 0.99999994, 1)
+bones/4/rotation = Quaternion(0.58739144, 0.2788599, -0.23474239, 0.722568)
+bones/4/scale = Vector3(0.9999998, 1, 1.0000001)
+bones/5/rotation = Quaternion(0.2691711, 4.231635e-10, 1.5353937e-08, 0.9630924)
+bones/5/scale = Vector3(0.99999994, 0.99999994, 1.0000001)
+bones/6/position = Vector3(0.20157036, 0.20455287, 0.028011624)
+bones/6/rotation = Quaternion(-0.42950115, -0.11684776, -0.29668307, 0.8448991)
+bones/6/scale = Vector3(0.99999994, 0.9999998, 0.99999976)
+bones/7/rotation = Quaternion(0, -0.28161055, 0, 0.9595288)
+bones/7/scale = Vector3(0.99999994, 1, 0.99999994)
 
-[node name="Blush" parent="Armature/Skeleton3D" index="0" unique_id=1208620163]
+[node name="Blush" parent="Armature/Skeleton3D" index="0" unique_id=1637776994]
 surface_material_override/0 = SubResource("ShaderMaterial_i05pn")
 
-[node name="Body" parent="Armature/Skeleton3D" index="1" unique_id=628057526]
+[node name="Body" parent="Armature/Skeleton3D" index="1" unique_id=336408131]
 surface_material_override/0 = SubResource("ShaderMaterial_f0mi7")
 
-[node name="Eyeball" parent="Armature/Skeleton3D" index="2" unique_id=422147792]
+[node name="Eyeball" parent="Armature/Skeleton3D" index="2" unique_id=714767031]
 surface_material_override/0 = SubResource("ShaderMaterial_i05pn")
 
-[node name="Halo" parent="Armature/Skeleton3D" index="3" unique_id=803739758]
+[node name="Halo" parent="Armature/Skeleton3D" index="3" unique_id=1011147773]
 surface_material_override/0 = SubResource("ShaderMaterial_lesy5")
 
-[node name="Pupil & Shine" parent="Armature/Skeleton3D" index="4" unique_id=1688435734]
+[node name="Pupil & Shine" parent="Armature/Skeleton3D" index="4" unique_id=473382940]
 surface_material_override/0 = SubResource("ShaderMaterial_1x352")
 surface_material_override/1 = SubResource("ShaderMaterial_ckdt2")
 
-[node name="ShoeL" parent="Armature/Skeleton3D" index="5" unique_id=2120106938]
+[node name="ShoeL" parent="Armature/Skeleton3D" index="5" unique_id=1345268130]
 transform = Transform3D(0.9022284, 0, 0.43125847, 0, 1, 0, -0.43125847, 0, 0.9022284, 0, 0, 0)
 surface_material_override/0 = SubResource("ShaderMaterial_4bx31")
 
-[node name="ShoeR" parent="Armature/Skeleton3D" index="6" unique_id=1096740454]
+[node name="ShoeR" parent="Armature/Skeleton3D" index="6" unique_id=1271349176]
 transform = Transform3D(0.93283004, 0, -0.36031672, 0, 1, 0, 0.36031672, 0, 0.93283004, 0, 0, 0)
 surface_material_override/0 = SubResource("ShaderMaterial_4bx31")
 

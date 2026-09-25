@@ -11,6 +11,7 @@ var parent : Player
 var hitbox_active := false
 var charge_level : int
 var hit_dreamcatcher := false
+var hit_shortcut := false
 
 var collision_point : Vector3
 
@@ -30,10 +31,6 @@ func call_spin_boost() -> void:
 #called by dreamcatcher
 func call_stop() -> void:
 	kart_sphere.apply_shortcut_stop_force()
-
-func _call_spin_clash() -> void:
-	pass
-	#will call a function that send both players in oppsite directions when both of them touch spins
 
 func _process(delta: float) -> void:
 	DebugDraw.draw_line(global_position, to_global(Vector3(-collision_point.x, collision_point.y, -collision_point.z)), Color(177.84, 24.316, 93.229, 1.0))

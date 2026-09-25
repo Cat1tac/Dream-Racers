@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://4t6wr7ytl4fm"]
 
-[ext_resource type="Texture2D" uid="uid://bxinukwv8vo05" path="res://assets/models/karts/BaseKart/KartBaseColor.png" id="1_n6naf"]
-[ext_resource type="Texture2D" uid="uid://d1ckdiq7nrrqg" path="res://assets/models/karts/BaseKart/KartEmissive.png" id="2_rfnvr"]
+[ext_resource type="Texture2D" uid="uid://di0oqxwaqjq8k" path="res://assets/models/karts/BaseKart/Seraphim Kart.png" id="1_rfnvr"]
+[ext_resource type="Texture2D" uid="uid://bg2740iwsfmcg" path="res://assets/models/karts/BaseKart/Seraphim Kart Emissive.png" id="2_swie1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nh4bs"]
 cull_mode = 1
@@ -105,14 +105,14 @@ render_priority = 0
 next_pass = SubResource("StandardMaterial3D_nh4bs")
 shader = SubResource("Shader_nh4bs")
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("1_n6naf")
+shader_parameter/texture_albedo = ExtResource("1_rfnvr")
 shader_parameter/albedo_texture_size = Vector2i(0, 0)
 shader_parameter/point_size = 0.10000000149012
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
-shader_parameter/emission_multiplier = 22.0
-shader_parameter/emission_color = Color(0.9851801, 0.67274034, 0.36264747, 1)
-shader_parameter/texture_emission = ExtResource("2_rfnvr")
+shader_parameter/emission_multiplier = 100.0
+shader_parameter/emission_color = Color(1, 0, 0.099999905, 1)
+shader_parameter/texture_emission = ExtResource("2_swie1")
 shader_parameter/specular = 0.0
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
