@@ -13,6 +13,7 @@ enum State {
 	TRACK_SELECT,
 	}
 
+# TODO set & auto detect what UI state is active based on which is visible
 func _ready() -> void:
 	if main_menu.visible:
 		current_state = State.MAIN_MENU
@@ -21,6 +22,10 @@ func _ready() -> void:
 func _on_race_button_pressed() -> void:
 	current_state = State.CHAR_SELECT
 	main_menu.transition_to_state(character_select)
+
+func _on_next_button_pressed() -> void:
+	current_state = State.TRACK_SELECT
+	character_select.transition_to_state(track_select)
 
 #endregion
 

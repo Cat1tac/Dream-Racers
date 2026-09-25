@@ -1,5 +1,5 @@
 78098b89c88a74ebe8c20117b8754620
-::res://::1790200558
+::res://::1790304273
 icon.svg::CompressedTexture2D::4981484351298396316::1790200416::1790200416::1::::<><><>0<>0<>788a2d31539ccc44c7e43d30e8ef373a<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex::
 ::res://assets/::1790200526
 ::res://assets/models/::1790200526
@@ -292,12 +292,12 @@ testtrack3_m64_road2.png::CompressedTexture2D::894282193890667052::1790200416::1
 testtrack3_th_bigtree.png::CompressedTexture2D::137342075443436836::1790200416::1790200416::1::::<><><>0<>0<>595ae11a338ea1eb8d38990ef62920f1<>res://.godot/imported/testtrack3_th_bigtree.png-a9b39002552ecefd15424c29fe0d5a81.s3tc.ctex::
 testtrack_3.tscn::PackedScene::1232519188144405990::1790200416::0::1::::<><><>0<>0<><>::uid://qmfcng3u4nyg::::res://src/tracks/testtrack3.glb
 track.gd::GDScript::5861214981281019294::1790200416::0::1::::<>BaseLevel<><>0<>0<><>::
-::res://src/ui/::1790200526
-mainmenu_theme.tres::Theme::1765141251940671603::1790200526::0::1::::<><><>0<>0<><>::
-ui.tscn::PackedScene::8556178555786628739::1790200526::0::1::::<><><>0<>0<><>::uid://0fbvbawx3yln::::res://src/ui/mainmenu_theme.tres<>uid://b14rojhjw7t7j::::res://src/ui/scripts/ui_manager.gd<>uid://cc8ck4keppajc::::res://icon.svg<>uid://cp1d4g0ts4gle::::res://src/ui/scripts/main_menu.gd<>uid://cvt0e2rfrgy70::::res://src/ui/scripts/character_select.gd<>uid://bbq3mvswtwiv3::::res://src/ui/scripts/track_select.gd
-::res://src/ui/scripts/::1790200526
+::res://src/ui/::1790214012
+mainmenu_theme.tres::Theme::1765141251940671603::1790213688::0::1::::<><><>0<>0<><>::
+ui.tscn::PackedScene::8556178555786628739::1790214012::0::1::::<><><>0<>0<><>::uid://0fbvbawx3yln::::res://src/ui/mainmenu_theme.tres<>uid://b14rojhjw7t7j::::res://src/ui/scripts/ui_manager.gd<>uid://cc8ck4keppajc::::res://icon.svg<>uid://cp1d4g0ts4gle::::res://src/ui/scripts/main_menu.gd<>uid://cvt0e2rfrgy70::::res://src/ui/scripts/character_select.gd<>uid://bbq3mvswtwiv3::::res://src/ui/scripts/track_select.gd
+::res://src/ui/scripts/::1790213996
 character_select.gd::GDScript::6287556773749087577::1790200526::0::1::::<>UIState<><>0<>0<><>::
 main_menu.gd::GDScript::5879582137212468922::1790200526::0::1::::<>UIState<><>0<>0<><>::
 track_select.gd::GDScript::2491362208543086502::1790200526::0::1::::<>UIState<><>0<>0<><>::
 ui_manager.gd::GDScript::4272255247104756181::1790200526::0::1::::<>Node<><>0<>0<><>::
-ui_state.gd::GDScript::5069870369320592358::1790200526::0::1::::UIState<>Control<><>1<>0<><>::
+ui_state.gd::GDScript::5069870369320592358::1790213996::0::1::::UIState<>Control<><>1<>0<><>::
