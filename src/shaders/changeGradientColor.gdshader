@@ -1,41 +1,53 @@
 shader_type canvas_item;
 
-uniform bool use_base_texture;
-uniform sampler2D replace_gradient;
-uniform sampler2D target_gradient;
+uniform sampler2D start_gradient;
+uniform sampler2D middle_gradient;
+uniform sampler2D end_gradient;
+uniform bool use_noise;
+uniform float noise_spd_x : hint_range(-1.0, 1.0, 0.01);
+uniform float noise_spd_y : hint_range(-1.0, 1.0, 0.01);
+uniform float noise_brightness : hint_range(0, 1, 0.01);
+uniform sampler2D noise_tex : repeat_enable;
 uniform float gradient_control : hint_range(0.0, 1.0, 0.0001);
+uniform float scroll_speed : hint_range(-1, 1, 0.01);
+uniform float x_position : hint_range(-1, 1, 0.01);
+uniform float y_position : hint_range(-1, 1, 0.01);
 
-void vertex() {
-	// Called for every vertex the material is visible on.
-}
 
-vec3 changed_gradient(vec4 tex_color, vec4 gradient){ // Makes new gradient based off the original image
+vec4 changed_gradient(vec4 tex_color, vec4 gradient){ // Makes new gradient based off the original image
 	//Find average of all rgb values
 	float tex_average = (tex_color.r + tex_color.g + tex_color.b) / 3.;
 	vec4 grayscale_tex = vec4(tex_average, tex_average, tex_average, 1);
 	vec3 gradient_final = clamp(gradient.rgb + (gradient.rgb - grayscale_tex.rgb), 0, 1.);
-	return gradient_final;
+	return vec4(gradient_final, tex_color.a);
 }
 
 void fragment() {
-	vec4 tex_color = texture(TEXTURE, UV);
-	vec4 gradient_color = texture(target_gradient, UV);
-	vec3 gradient_to_transition_from;
-	if (!use_base_texture){ // Tints original image with "gradient to replace" without overwritting original image
-		vec4 gradient_to_replace_color = texture(replace_gradient, UV);
-		gradient_to_transition_from = changed_gradient(tex_color, gradient_to_replace_color);
-	} else {
-		gradient_to_transition_from = tex_color.rgb;
+	vec4 tex_color = texture(TEXTURE, UV + vec2(TIME * scroll_speed + x_position, y_position));
+	// Noise variation
+	if (use_noise){
+		vec4 noise = texture(noise_tex, UV + vec2(TIME * noise_spd_x, sin(TIME * noise_spd_y)));
+		tex_color.rgb = clamp(tex_color.rgb + noise.rgb * noise_brightness, 0, 1); //(clamp(noise.rgb + (1. - noise_brightness), 0, 1));
 	}
 	
-	vec3 gradient_to_transition_to = changed_gradient(tex_color, gradient_color);
+	// Get all gradients after they've been processed through the original image
+	vec4 first_gradient_tex = changed_gradient(tex_color, texture(start_gradient, UV));
+	vec4 second_gradient_tex = changed_gradient(tex_color, texture(middle_gradient, UV));
+	vec4 third_gradient_tex = changed_gradient(tex_color, texture(end_gradient, UV));
 	
 	//Gets distance between new gradient and previous gradient
-	vec3 tex_difference = gradient_to_transition_to.rgb - gradient_to_transition_from.rgb;
+	vec3 first_to_second_gradient_difference = second_gradient_tex.rgb - first_gradient_tex.rgb;
+	vec3 second_to_third_gradient_difference = third_gradient_tex.rgb - second_gradient_tex.rgb;
 	
-	float t = min(gradient_control, 1); // calculates interpolation factor so that rgb values arrive at destination at the same time
-	
-	vec3 transition = vec3(t * tex_difference.r, t * tex_difference.g, t * tex_difference.b);
-	
-	COLOR.rgb = gradient_to_transition_from.rgb + transition;
+	float t; // calculates interpolation factor so that rgb values arrive at destination at the same time
+	vec4 transition;
+	if(gradient_control < 0.5){
+		t = min((gradient_control * 2.), 1.);
+		transition = vec4(t * first_to_second_gradient_difference.rgb, 0);
+		COLOR = first_gradient_tex + transition;
+	} else {
+		t = min(((gradient_control - 0.5) * 2.), 1.);
+		transition = vec4(t * second_to_third_gradient_difference.rgb, 0);
+		COLOR = second_gradient_tex + transition;
+	}
 }

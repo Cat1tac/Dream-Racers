@@ -12,3 +12,6 @@ res://assets/ui/main menu/gradients/night_gradient.tres
 res://assets/ui/main menu/gradients/sunset_gradient.tres
 res://src/debug/test.tscn
 res://assets/ui/main menu/gradients/twilight_gradient.tres
+res://assets/ui/main menu/gradients/cloud_twilight_gradient.tres
+res://assets/ui/main menu/gradients/bg_noise_tex.tres
+res://assets/ui/main menu/gradients/cloud_noise_tex.tres
