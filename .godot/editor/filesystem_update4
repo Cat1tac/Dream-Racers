@@ -15,3 +15,8 @@ res://assets/ui/main menu/gradients/twilight_gradient.tres
 res://assets/ui/main menu/gradients/cloud_twilight_gradient.tres
 res://assets/ui/main menu/gradients/bg_noise_tex.tres
 res://assets/ui/main menu/gradients/cloud_noise_tex.tres
+res://src/core/main_game/main_game.tscn
+res://src/core/autoload/scene_paths.gd
+res://src/gameplay/player/kart/trailing/trail_spawner.tscn
+res://src/gameplay/player/kart/trailing/trail_spawner.gd
+res://src/core/main_game/main_game.gd

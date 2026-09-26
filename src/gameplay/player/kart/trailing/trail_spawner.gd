@@ -1,6 +1,6 @@
 class_name Trail_Spawner extends Node3D
 
-const TRAIL_OBJECT_SCENE : PackedScene = preload(Constants.SCENE_PATHS.trail_object)
+const TRAIL_OBJECT_SCENE : PackedScene = preload(ScenePaths.PLAYER.trail_object)
 
 
 @export var player : Player

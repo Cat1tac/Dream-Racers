@@ -26,6 +26,7 @@ shader_parameter/gradient_control = 0.9999999747
 shader_parameter/scroll_speed = 0.13999997451871993
 shader_parameter/x_position = -2.2352000028647012e-08
 shader_parameter/y_position = -2.2352000028647012e-08
+shader_parameter/wave_spd = 0.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_01sja"]
 load_path = "res://.godot/imported/skybggradient.png-23c087b29eb051b48e860b5303950abc.ctex"
@@ -48,6 +49,15 @@ shader_parameter/gradient_control = 0.0
 shader_parameter/scroll_speed = -6.7056e-08
 shader_parameter/x_position = -2.2352000028647012e-08
 shader_parameter/y_position = 0.0
+shader_parameter/wave_spd = 0.0
+
+[sub_resource type="Curve" id="Curve_86u7o"]
+_data = [Vector2(0, 0.09900987), 0.0, 0.0, 0, 0, Vector2(0.49802375, 1), -0.13183945, -0.13183945, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tc86p"]
+width = 258
+curve = SubResource("Curve_86u7o")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lge3s"]
 shader = ExtResource("1_cjsqc")
@@ -63,6 +73,8 @@ shader_parameter/gradient_control = 0.9999999747
 shader_parameter/scroll_speed = 0.01999993249695997
 shader_parameter/x_position = -2.2352000028647012e-08
 shader_parameter/y_position = -2.2352000028647012e-08
+shader_parameter/wave = SubResource("CurveTexture_tc86p")
+shader_parameter/wave_spd = 0.30000000447036
 
 [node name="Control" type="Control" unique_id=1665049764]
 layout_mode = 3
@@ -82,8 +94,7 @@ scale = Vector2(0.3, 0.3)
 texture = SubResource("CompressedTexture2D_01sja")
 
 [node name="Sun" type="TextureRect" parent="." unique_id=533300918]
-visible = false
-texture_repeat = 2
+texture_repeat = 1
 material = SubResource("ShaderMaterial_sr8db")
 layout_mode = 0
 offset_right = 3840.0
@@ -96,6 +107,6 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_lge3s")
 layout_mode = 0
 offset_right = 3840.0
-offset_bottom = 2160.0
+offset_bottom = 2193.3333
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_sjquj")
